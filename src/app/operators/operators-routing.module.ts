@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 
 import { MapComponent } from './map/map.component';
+import { MergeMapComponent } from './merge-map/merge-map.component';
 
 const routes: Routes = [
-  { path: '', component: MapComponent }
+  { path: 'map', component: MapComponent },
+  { path: 'mergeMap', component: MergeMapComponent }
 ];
 
 @NgModule({
