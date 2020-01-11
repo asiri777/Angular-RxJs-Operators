@@ -4,6 +4,7 @@ import { HomeComponent } from './core/home/home.component';
 
 
 const routes: Routes = [
+  { path: 'map', loadChildren: () => import('./operators/operators.module').then(m => m.OperatorsModule) },
   { path: '', component: HomeComponent }
 ];
 
