@@ -12,7 +12,6 @@ import { SwitchMapComponent } from './switch-map/switch-map.component';
   imports: [
     CommonModule,
     OperatorsRoutingModule
-  ],
-  exports: [MapComponent]
+  ]
 })
 export class OperatorsModule { }
