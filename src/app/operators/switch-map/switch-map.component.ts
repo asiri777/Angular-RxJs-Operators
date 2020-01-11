@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { of, from } from 'rxjs';
+import { of, from, BehaviorSubject } from 'rxjs';
 import { delay, map, switchAll, switchMap } from 'rxjs/operators';
 
 @Component({
@@ -10,11 +10,12 @@ import { delay, map, switchAll, switchMap } from 'rxjs/operators';
 export class SwitchMapComponent {
 
   constructor() {
-    const getData = (param) => {
-      return of(`retrieved new data with param ${param}`).pipe(
-        delay(1000)
-      );
-    };
+    // Example 1 - Start
+    // const getData = (param) => {
+    //   return of(`retrieved new data with param ${param}`).pipe(
+    //     delay(1000)
+    //   );
+    // };
 
     // // using a regular map
     // from([1, 2, 3, 4]).pipe(
@@ -27,9 +28,43 @@ export class SwitchMapComponent {
     //   switchAll()
     // ).subscribe(val => console.log(val));
 
+    // // using switchMap
+    // from([1, 2, 3, 4]).pipe(
+    //   switchMap(param => getData(param))
+    // ).subscribe(val => console.log(val));
+    // Example 1 - End
+
+    // Example 2 - start
+    const filters = ['brand=porsche', 'model=911', 'horsepower=389', 'color=red']
+    const activeFilters = new BehaviorSubject('');
+
+    const getData = (params) => {
+      return of(`retrieved new data with params ${params}`).pipe(
+        delay(1000)
+      );
+    };
+
+    const applyFilters = () => {
+      filters.forEach((filter, index) => {
+
+        let newFilters = activeFilters.value;
+        if (index === 0) {
+          newFilters = `?${filter}`;
+        } else {
+          newFilters = `${newFilters}&${filter}`;
+        }
+
+        activeFilters.next(newFilters);
+      });
+    };
+
     // using switchMap
-    from([1, 2, 3, 4]).pipe(
+    activeFilters.pipe(
       switchMap(param => getData(param))
     ).subscribe(val => console.log(val));
+
+    applyFilters();
+    // Example 2 - End
+
   }
 }
