@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { MapComponent } from './map/map.component';
 import { OperatorsRoutingModule } from './operators-routing.module';
 import { MergeMapComponent } from './merge-map/merge-map.component';
+import { SwitchMapComponent } from './switch-map/switch-map.component';
 
 
 
 @NgModule({
-  declarations: [MapComponent, MergeMapComponent],
+  declarations: [MapComponent, MergeMapComponent, SwitchMapComponent],
   imports: [
     CommonModule,
     OperatorsRoutingModule
